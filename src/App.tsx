@@ -5,6 +5,7 @@ import TaskCounter from './components/TaskCounter'
 import { TaskList } from './components/TaskList'
 import type { Task } from './components/TaskList'
 import { useState } from 'react'
+import AddTaskForm from './components/AddTaskForm'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([
@@ -43,6 +44,10 @@ function App() {
     ));
   };
 
+  const handleAddTask = (task: Task) => {
+    setTasks([...tasks, task]);
+  };
+
   return (
     <div className="p-4 space-y-4">
       <Welcome name="Александр" />
@@ -51,7 +56,7 @@ function App() {
         <h2 className="text-xl font-bold">Тестирование TaskCounter:</h2>
         <TaskCounter count={tasks.length} />
         <TaskList tasks={tasks} onToggle={handleToggle} />
-        
+        <AddTaskForm onAdd={handleAddTask} />
       </div>
     </div>
   )
